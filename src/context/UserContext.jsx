@@ -1,9 +1,13 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import run from '../gemini';
 
 export const DataContext = createContext(); // 👈 Name must match what you import
 
 const UserContext = ({ children }) => {
+
+  let [speaking,setSpeaking] = useState(false)
+
+
   function speak(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.volume = 1;
@@ -25,11 +29,13 @@ const UserContext = ({ children }) => {
 
   async function aiResponse(prompt){
      let text = await run(prompt);
-     console.log(text)
+     speak(text)
 
   }
   const value = {
-  recognition
+  recognition,
+  speaking,
+  setSpeaking,
   };
 
   return (
