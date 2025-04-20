@@ -37,3 +37,25 @@ button{
 
 
 }
+
+#speakimgid{
+  width: 100px;
+}
+p{
+  font-size: 1.5vmax;
+  color: white;
+
+}
+.response{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+#aigif{
+
+  width: 50vw;
+  height: 100px;
+
+}
