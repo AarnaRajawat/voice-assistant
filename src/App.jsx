@@ -7,7 +7,7 @@ import speakimg from './assets/speak.gif'
 import  aigif from './assets/aiVoice.gif'
 
 const App = () => {
-  const { recognition,speaking,setSpeaking,prompt,response,setPrompt } = useContext(DataContext); 
+  const { recognition,speaking,setSpeaking,prompt,response,setPrompt,setResponse} = useContext(DataContext); 
     
  
 
@@ -20,6 +20,7 @@ const App = () => {
       {!speaking?
       <button onClick={() =>{
       setSpeaking(true)
+      setResponse(false)
       setPrompt("listening...")
          recognition.start()}}>
         Click here <CiMicrophoneOn />

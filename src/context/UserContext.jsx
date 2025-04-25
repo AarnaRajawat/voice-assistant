@@ -15,7 +15,7 @@ const UserContext = ({ children }) => {
     utterance.volume = 1;
     utterance.rate = 1;
     utterance.pitch = 1;
-    utterance.lang = 'en-gb'; // ✅ fixed language
+    utterance.lang = 'en-Gb'; // ✅ fixed language
     window.speechSynthesis.speak(utterance);
   }
 
@@ -26,21 +26,79 @@ const UserContext = ({ children }) => {
    let currentIndex = e.resultIndex;
    let transcript = e.results[currentIndex][0].transcript;
    setPrompt(transcript)
-   aiResponse(transcript)
+   takeCommand(transcript.toLowerCase())
   }
 
   async function aiResponse(prompt){
      let text = await run(prompt);
-     speak(text)
-     setPrompt(text)
+     let newText = text.split("**") && text.split("*") && text.replace("google","Aparna Rajawat") && text.replace("Google","Aparna Rajawat")
+     speak(newText)
+     setPrompt(newText)
      setResponse(true)
 
      setTimeout(()=>{
       setSpeaking(false)
 
      },5000)
-    
+  }
 
+  function takeCommand(command){
+
+    if(command.includes("open") && command.includes("youtube")){
+
+      window.open("https://www.youtube.com/", "_blank")
+      speak("opening youtube")
+      setPrompt("opening youtube...")
+      setTimeout(()=>{
+        setSpeaking(false)
+  
+       },5000)
+    }
+
+   else if(command.includes("open") && command.includes("google")){
+
+      window.open("https://www.google.com/", "_blank")
+      speak("opening google")
+      setPrompt("opening google...")
+      setTimeout(()=>{
+        setSpeaking(false)
+  
+       },5000)
+    }
+    else if(command.includes("open") && command.includes("instagram")){
+
+      window.open("https://www.instagram.com/", "_blank")
+      speak("opening instagram")
+      setPrompt("opening instagram...")
+      setTimeout(()=>{
+        setSpeaking(false)
+  
+       },5000)
+    }
+
+    else if(command.includes("open") && command.includes("facebook")){
+
+      window.open("https://www.facebook.com/", "_blank")
+      speak("opening facebook")
+      setPrompt("opening facebook...")
+      setTimeout(()=>{
+        setSpeaking(false)
+  
+       },5000)
+    }
+    else if(command.includes("open") && command.includes("twitter")){
+
+      window.open("https://x.com/home", "_blank")
+      speak("opening twitter")
+      setPrompt("opening twitter...")
+      setTimeout(()=>{
+        setSpeaking(false)
+  
+       },5000)
+    }
+    else{
+      aiResponse(command)
+    }
   }
   const value = {
   recognition,
@@ -49,6 +107,7 @@ const UserContext = ({ children }) => {
   setPrompt,
   prompt,
   response,
+  setResponse
   };
 
   return (
